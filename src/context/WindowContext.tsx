@@ -12,10 +12,10 @@ export const useWindowContext = () => (
 
 export const WindowContextProvider: React.FC<{children?: React.ReactNode}> = (props) => {
     const [mobile, setMobile] = useState(false)
-    const ref = React.useRef(window)
+    const ref = React.useRef(typeof window !== "undefined" && window)
 
     const listener = () => {
-        if (ref.current.innerWidth >= 600) {
+        if (ref.current && ref.current.innerWidth >= 600) {
             setMobile(false)
         } else {
             setMobile(true)
@@ -24,10 +24,16 @@ export const WindowContextProvider: React.FC<{children?: React.ReactNode}> = (pr
 
     useEffect(() => {
         ref.current = window
-        listener()
-        ref.current.addEventListener("resize", listener)
-        return () => ref.current.removeEventListener("resize", listener)
-    }, [window])
+        if (ref.current) {
+            listener()
+            ref.current.addEventListener("resize", listener)
+            return () => {
+                if (ref.current) {
+                    ref.current.removeEventListener("resize", listener)
+                }
+            }
+        }
+    }, [ref.current])
 
     return (
         <context.Provider value={{mobile}}>
