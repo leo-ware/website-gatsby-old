@@ -1,9 +1,11 @@
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 // @ts-ignore
 import * as styles from "./Navbar.module.css"
 
-import { useWindowContext } from "../../context/WindowContext"
+import styled from "styled-components"
+
 import Link from "../Link"
+import { useWindowContext } from "../../context/WindowContext"
 
 const NavbarLink: React.FC<{name: string}> = (props) => {
     return (
@@ -25,7 +27,24 @@ const NavbarDropDownIcon: React.FC<{onClick?: () => void}> = (props) => {
     )
 }
 
-const Navbar: React.FC<{scrolled?: boolean, overScrolled?: boolean}> = ({scrolled}) => {
+const NavbarContainer = styled.div<{open?: boolean, scrolled?: boolean}>`
+    position: fixed;
+    top: 0;
+    width: 100%;
+    height: ${(props) => "60px"};
+
+    border-bottom: ${(props) => props.scrolled ? "1px solid grey" : "none"};
+
+    background-color: white;
+    z-index: 1000;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: stretch;
+`
+
+const Navbar: React.FC<{scrolled: boolean}> = ({scrolled}) => {
 
     const {mobile} = useWindowContext()
     const [open, setOpen] = useState(false)
@@ -35,7 +54,7 @@ const Navbar: React.FC<{scrolled?: boolean, overScrolled?: boolean}> = ({scrolle
     }
 
     return (
-        <div className={styles.main + " " + (scrolled && styles.mainScrolled)}>
+        <NavbarContainer scrolled={scrolled}>
             <div className={styles.nav + " " + (open && styles.navOpen)}>
                 <div className={styles.left + " " + styles.lr}>
                     <div className={styles.name}>
@@ -67,7 +86,7 @@ const Navbar: React.FC<{scrolled?: boolean, overScrolled?: boolean}> = ({scrolle
                             </div>
                         ))}
                 </div>}
-        </div>
+        </NavbarContainer>
     )
 }
 

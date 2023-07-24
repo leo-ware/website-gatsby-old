@@ -79,7 +79,7 @@ To get an idea of what this might look like, consider the following causal graph
 
 This is an example of the front-door model, a famous graphical model where identification is possible. We can use pqp to identify the interventional distribution $P(cancer | do(smoking))$.
 
-```python
+~~~python
 from pqp.identification import Graph, ATE
 from pqp.symbols import make_vars, P, do
 
@@ -99,7 +99,7 @@ model = Graph([
 causal_estimand = P(C, given=do(S))
 
 model.identify(causal_estimand)
-```
+~~~
 
 And, we arrive at a formula for the interventional distribution in terms of the joint distribution:
 

@@ -15,17 +15,15 @@ export default Layout
 import { InlineMath } from 'react-katex'
 import {X, Y, X_, Y_, ATE, CATE} from "../../components/Variables"
 
-# Formalizing Causal Questions
-
 To have a well-defined causal inference problem, we need to mathematically express two things: the assumptions we are willing to make and the question we are trying to answer. To do this, we will take advantage of two important modeling constructs, DAGs and the do-operator.
 
-## Causal Assumptions
+# Causal Assumptions
 
 The easiest way to express causal assumptions is in a graph. Nodes represent observed variables, i.e., variables which we can measure for each unit. Directed edges represent possible causal effects. Bidirected edges represent situations in which we think there might be an unobserved confounder influencing two variables. We call these models DAGs.
 
 **Assumptions**: For the algorithms in PQP to work, there can’t be any cycles in the graph. If you can start at one node and then follow directed edges in a circle to end up back where you started, then the graph is invalid.
 
-## Causal Estimands
+# Causal Estimands
 
 When we formalize a causal question, we call it a causal estimand. These are statistical expressions involving do-operators. Do-operators represent intervening on a variable, so the expression <InlineMath math={"P(Y=y | do(X=x))"}/> represents the probability that the variable <Y/> takes on the value <Y_/> given that we have intervened on <X/> to set it to <X_/>. It can take practice to learn to express causal questions appropriately because the notion of intervention is somewhat subtle.
 

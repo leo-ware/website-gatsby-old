@@ -1,9 +1,8 @@
 import React from "react"
-import Grid from "../Grid/Grid"
-// import Content from "../Content/Content"
-import { WindowContextProvider } from "../../context/WindowContext"
-
 import "./AppInner.css"
+
+import Grid from "../Grid"
+import { WindowContextProvider } from "../../context/WindowContext"
 
 type AppInnerType = {
     children: React.ReactNode
@@ -11,13 +10,11 @@ type AppInnerType = {
 
 const AppInner: React.FC<AppInnerType> = (props) => {
     return (
-        <main>
-            <WindowContextProvider>
-                <Grid>
-                    {props.children}
-                </Grid>
-            </WindowContextProvider>
-        </main>
+        <WindowContextProvider>
+            <Grid>
+                {props.children}
+            </Grid>
+        </WindowContextProvider>
     )
 }
 

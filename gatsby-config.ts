@@ -68,6 +68,7 @@ const config: GatsbyConfig = {
                 root: __dirname,
                 gatsbyRemarkPlugins: [
                     // wrapESMPlugin(`remark-gfm`), // wtf @ https://www.gatsbyjs.com/plugins/gatsby-plugin-mdx/#mdxoptions
+                    "gatsby-remark-prismjs",
                     {
                         resolve: 'gatsby-remark-images',
                         options: {

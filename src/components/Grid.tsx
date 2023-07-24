@@ -1,14 +1,39 @@
 import React, {useRef, useState} from "react"
-import Navbar from "../Navbar/Navbar"
+import Navbar from "./Navbar/Navbar"
 
+// @ts-ignore
 import * as styles from "./Grid.module.css"
+import { styled } from "styled-components"
 
 type GridType = {
     children: React.ReactNode
 }
 
+const ContentOuter = styled.div`
+    overflow-y: scroll;
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+`
+
+const ScrollContainer = styled.div`
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+`
+
+const ContentInner = styled.div`
+    margin: 60px 0;
+    width: 700px;
+    max-width: 90%;
+`
+
 const Grid: React.FC<GridType> = (props) => {
     const contentOuterRef = useRef<null | HTMLDivElement>(null)
+
     const [scrolled, setScrolled] = useState(false)
     const [overScrolled, setOverScrolled] = useState(false)
 
@@ -29,20 +54,14 @@ const Grid: React.FC<GridType> = (props) => {
     }
 
     return (
-        <div className={styles.main}>
-            <div className={styles.headerContainer}>
-                <Navbar scrolled={scrolled} overScrolled={overScrolled}/>
-            </div>
-            <div className={styles.contentOuter} ref={contentOuterRef} onScroll={handleScroll}>
-                <div className={styles.scrollContainer}>
-                    <div className={styles.contentMargin}/>
-                    <div className={styles.contentInner}>
-                        {props.children}
-                    </div>
-                    <div className={styles.contentMargin}/>
-                </div>
-            </div>
-        </div>
+        <ContentOuter ref={contentOuterRef} onScroll={handleScroll}>
+            <Navbar scrolled={scrolled}/>
+            <ScrollContainer>
+                <ContentInner>
+                    {props.children}
+                </ContentInner>
+            </ScrollContainer>
+        </ContentOuter>
     )
 }
 

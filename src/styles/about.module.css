@@ -11,6 +11,10 @@
     margin-bottom: 10px;
 }
 
+.text {
+    font-family: Arial;
+}
+
 .box {
     flex-basis: 100px;
     flex-grow: 1;
