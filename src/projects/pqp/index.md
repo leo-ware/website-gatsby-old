@@ -5,6 +5,6 @@ description: "foo, some stuff"
 thumbnail: "/assets/images/pqp.png"
 ---
 
-## Introduction to my blog post
+# PQP
 
-Great content of my first blog
+This is a thing about PQP

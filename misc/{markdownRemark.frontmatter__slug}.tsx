@@ -1,8 +1,13 @@
 import React from "react"
+
+import 'katex/dist/katex.min.css';
+import { MDXProvider } from "@mdx-js/react"
+
 import AppInner from "../components/AppInner/AppInner"
 import { PageProps, graphql } from "gatsby"
 import headFactory from "../components/Head"
 import BigTitle from "../components/BigTitle/BigTitle"
+import TopMargin from "../components/TopMargin"
 
 export const Head = headFactory({title: "Projects"})
 
@@ -18,24 +23,19 @@ export const pageQuery = graphql`
   }
 `
 
-type ProjectType = {
-    frontmatter: {
-        title: string
-        slug: string
-        date: string
-    }
-    html: string
-}
-
 const ProjectPage: React.FC<PageProps<Queries.eachProjectQuery>> = ({data}) => {
     return (
         <AppInner>
-            <div>
-                <BigTitle>
-                    {data.markdownRemark?.frontmatter?.title || "Todo: Title"}
-                </BigTitle>
-            </div>
-            <div dangerouslySetInnerHTML={{__html: data.markdownRemark?.html || ""}}/>
+            <MDXProvider>
+                <TopMargin>
+                    <div>
+                        <BigTitle>
+                            {data.markdownRemark?.frontmatter?.title || "Todo: Title"}
+                        </BigTitle>
+                    </div>
+                    <div dangerouslySetInnerHTML={{__html: data.markdownRemark?.html || ""}}/>
+                </TopMargin>
+            </MDXProvider>
         </AppInner>
     )
 }

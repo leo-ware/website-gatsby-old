@@ -18,9 +18,9 @@ const NavbarLink: React.FC<{name: string}> = (props) => {
 const NavbarDropDownIcon: React.FC<{onClick?: () => void}> = (props) => {
     return (
         <div className={styles.dropdownIcon} onClick={props.onClick}>
-            {/* <div className={styles.bar}/>
             <div className={styles.bar}/>
-            <div className={styles.bar}/> */}
+            <div className={styles.bar}/>
+            <div className={styles.bar}/>
         </div>
     )
 }
@@ -47,7 +47,7 @@ const Navbar: React.FC<{scrolled?: boolean, overScrolled?: boolean}> = ({scrolle
                 <div className={styles.right + " " + styles.lr}>
                     {mobile
                         ? <NavbarDropDownIcon onClick={() => setOpen(!open)}/>
-                        : ["About", "Projects", "CV"].map((name) => (
+                        : ["About", "Projects", "Blog", "CV"].map((name) => (
                             <div key={name} className={styles.linkContainer}>
                                 <Link to={"/" + name.toLowerCase()} style={{textDecoration: "none"}}>
                                     <h2 className={styles.linkText}>{name}</h2>
@@ -59,7 +59,7 @@ const Navbar: React.FC<{scrolled?: boolean, overScrolled?: boolean}> = ({scrolle
             </div>
             {open &&
                 <div className={styles.dd}>
-                    {["About", "Projects", "CV"].map((name) => (
+                    {["About", "Projects", "Blog", "CV"].map((name) => (
                             <div className={styles.linkContainer}>
                                 <Link to={name.toLowerCase()} className={styles.linkDD}>
                                     <h4 className={styles.linkText}>{name}</h4>

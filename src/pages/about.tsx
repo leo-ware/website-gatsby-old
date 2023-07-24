@@ -6,6 +6,9 @@ import Link from "../components/Link"
 import AppInner from "../components/AppInner/AppInner"
 
 import { StaticImage } from "gatsby-plugin-image"
+import headFactory from "../components/Head"
+
+export const Head = headFactory({ title: "About - Leo Ware" })
 
 const About: React.FC = () => {
     return (

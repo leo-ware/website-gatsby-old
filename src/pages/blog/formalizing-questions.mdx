@@ -1,0 +1,41 @@
+---
+title: "Formalizing Causal Questions"
+description: "Formalizing causal inference problems using DAGs and the do-operator"
+slug: "/blog/formalizing-questions"
+tags:
+    - causal-inference
+    - intro
+    - dags
+    - do-calculus
+---
+
+import Layout from "../../components/MDXLayout"
+export default Layout
+
+import { InlineMath } from 'react-katex'
+import {X, Y, X_, Y_, ATE, CATE} from "../../components/Variables"
+
+# Formalizing Causal Questions
+
+To have a well-defined causal inference problem, we need to mathematically express two things: the assumptions we are willing to make and the question we are trying to answer. To do this, we will take advantage of two important modeling constructs, DAGs and the do-operator.
+
+## Causal Assumptions
+
+The easiest way to express causal assumptions is in a graph. Nodes represent observed variables, i.e., variables which we can measure for each unit. Directed edges represent possible causal effects. Bidirected edges represent situations in which we think there might be an unobserved confounder influencing two variables. We call these models DAGs.
+
+**Assumptions**: For the algorithms in PQP to work, there can’t be any cycles in the graph. If you can start at one node and then follow directed edges in a circle to end up back where you started, then the graph is invalid.
+
+## Causal Estimands
+
+When we formalize a causal question, we call it a causal estimand. These are statistical expressions involving do-operators. Do-operators represent intervening on a variable, so the expression <InlineMath math={"P(Y=y | do(X=x))"}/> represents the probability that the variable <Y/> takes on the value <Y_/> given that we have intervened on <X/> to set it to <X_/>. It can take practice to learn to express causal questions appropriately because the notion of intervention is somewhat subtle.
+
+Fortunately, PQP offers a suite of causal estimands that correspond to common questions.
+
+The Average Treatment Effect (<ATE/>) asks the same question as a randomized controlled trial. On average, what is the difference in outcome between treatment and control groups?
+The Conditional Treatment Effect (<CATE/>) is the same as the <ATE/>, only it measures the effect for a specific subpopulation rather than the entire study population.
+
+Most questions you might want to ask about the causal effect of a binary treatment can be expressed with one of these, but much more is possible.
+
+[Conceptually, we need to divide the world into two systems, “nature” and “us”. Nature would assign some value to each variable using a process characterized by the DAG. If we intervene on a variable, then we are assuming that the variable is instead set by some other process which does not influence any of the other variables in the model. The SEP has a good deep dive on this topic.]
+
+**Assumptions**: The algorithms in PQP assume that interventions and conditions are consistent. So, the causal estimand <InlineMath math={"P(Y=y | X=1, do(X=0))"}/> is invalid. These kinds of estimands are called counterfactual estimands, and they require more advanced techniques. This is called the assumption of noncontradictory evidence. Additionally, they assume that every probability distribution in an estimand is positive. They cannot estimate an expression like <InlineMath math={"P(Y=1 | do(X=1))"}/> if there are no units where <InlineMath math={"X=1 and Y=1"}/> in the dataset.

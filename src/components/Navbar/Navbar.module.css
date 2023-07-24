@@ -64,5 +64,18 @@
 .dropdownIcon {
     height: 30px;
     width: 30px;
+    /* border: 1px solid black; */
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.bar {
+    height: 3px;
+    /* border-radius: 1px; */
+    margin-bottom: 4px;
+    width: 90%;
     background-color: black;
 }
