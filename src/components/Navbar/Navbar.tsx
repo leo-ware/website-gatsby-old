@@ -66,7 +66,7 @@ const Navbar: React.FC<{scrolled: boolean}> = ({scrolled}) => {
                 <div className={styles.right + " " + styles.lr}>
                     {mobile
                         ? <NavbarDropDownIcon onClick={() => setOpen(!open)}/>
-                        : ["About", "Projects", "Blog", "CV"].map((name) => (
+                        : ["About", "Capstone", "Blog", "CV"].map((name) => (
                             <div key={name} className={styles.linkContainer}>
                                 <Link to={"/" + name.toLowerCase()} style={{textDecoration: "none"}}>
                                     <h2 className={styles.linkText}>{name}</h2>

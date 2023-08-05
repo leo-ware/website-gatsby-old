@@ -1,5 +1,6 @@
 import React from "react"
 import "./AppInner.css"
+import "../../styles/app.css"
 
 import Grid from "../Grid"
 import { WindowContextProvider } from "../../context/WindowContext"
